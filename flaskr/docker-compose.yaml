@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v1.7
+    restart: unless-stopped
+    labels:
+      - traefik.frontend.rule=Host:traefik.org,traefik.com
+      - traefik.port=8080
+      - traefik.enable=true
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/traefik.toml:/etc/traefik/traefik.toml
+      - ${PWD}/certs:/certs
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The HTTPS port
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+
+  web_app:
+    build: web_app/
+    restart: unless-stopped
+    labels:
+      - traefik.frontend.rule=Host:web-app.com,www.web-app.com
+      - traefik.port=82
+      - traefik.enable=true
+

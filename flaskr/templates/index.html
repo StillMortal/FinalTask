@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block body %}
+<h1> Home page </h1>
+<hr class="rounded">
+<p>First you need to add a container using "Adding a container".</p>
+
+<p>Remember that the folder of the new service along with Dockerfile should be located in the flaskr directory.
+In the flaskr directory, see the <mark>web_app</mark> and <mark>web_string</mark> directories as an example.</p>
+<hr class="rounded">
+<p>If you need to delete the service or change the configuration, then use "Depublication".</p>
+
+<p>Remember that you cannot change the configuration without first deleting the service.</p>
+<hr class="rounded">
+<p>You can restart the service (after "Depublication") using "Republication".</p>
+<hr class="rounded">
+After "Depublication", you can change the configuration of services in "Configuration of services".
+
+{% endblock %}
